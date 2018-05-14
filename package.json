@@ -1,0 +1,20 @@
+{
+  "name": "window-clipboard",
+  "version": "0.0.1",
+  "description": "clipboard developed by electron",
+  "main": "client/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "electron、vue"
+  ],
+  "author": "HanQ",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "ajv": "^6.5.0",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "electron": "^2.0.0",
+    "electron-builder": "^20.13.3"
+  }
+}
