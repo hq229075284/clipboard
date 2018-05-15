@@ -1,8 +1,8 @@
 <template>
-  <div class="title" v-text="this.name">
+  <v-app class="root">
     <search/>
     <clipboardList :dataSource="this.dataSource"/>
-  </div>
+  </v-app>
 </template>
 
 <script>

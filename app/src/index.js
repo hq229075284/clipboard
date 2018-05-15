@@ -3,6 +3,7 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@style/base.less'
 import { ipcRenderer } from 'electron'
+import './font/material-icons.css'
 import App from './struct/app'
 
 let count = 0

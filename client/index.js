@@ -8,7 +8,7 @@ const isWindows = process.platform === 'win32'
 let win
 
 function createWindow() {
-  win = new BrowserWindow({ width: 800, height: 800, show: false, frame: false })
+  win = new BrowserWindow({ width: 800, height: 800, show: false, frame: true })
 
   win.once('ready-to-show', () => {
     win.show()
@@ -19,7 +19,7 @@ function createWindow() {
     pathname: 'http://localhost:2333/index.html',
     // protocol: 'http',
   }))
-  if (!isProduction) {
+  if (!isProduction && isMac) {
     const devtool = BrowserWindow.addDevToolsExtension('/Users/HQ/Library/Application Support/Google/Chrome/Default/Extensions/nhdogjmejiglipccpnnnanhbledajbpd/4.1.4_0')
   }
   win.on('closed', () => {
