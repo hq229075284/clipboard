@@ -2,7 +2,6 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpack = require('webpack')
 
 const resolvePath = (rPath) => {
   return path.join(__dirname, rPath)
@@ -55,8 +54,9 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue'],
     alias: {
-      'vue': 'vue/dist/vue.min.js',
-      '@style': resolvePath('../src/style')
+      'vue': 'vue/dist/vue.js',
+      '@components': resolvePath('../src/components'),
+      '@style': resolvePath('../src/style'),
     }
   },
   plugins: [
@@ -89,5 +89,6 @@ module.exports = {
     },
     runtimeChunk: 'single'
   },
-  devtool: 'eval-source-map'
+  devtool: '#eval-source-map',
+  target: "electron-renderer"
 }

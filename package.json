@@ -4,6 +4,7 @@
   "description": "clipboard developed by electron",
   "main": "client/index.js",
   "scripts": {
+    "start": "cross-env NODE_ENV=development electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

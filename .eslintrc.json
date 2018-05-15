@@ -11,7 +11,7 @@
     },
     "sourceType": "module"
   },
-  "extends": ["plugin:vue/essential"],
+  "extends": ["plugin:vue/essential","airbnb-base"],
   "rules": {
     "no-const-assign": "warn",
     "no-this-before-super": "warn",
@@ -20,6 +20,12 @@
     "no-unused-vars": "warn",
     "constructor-super": "warn",
     "valid-typeof": "warn",
-    "no-nested-ternary": "error"
+    "no-nested-ternary": "error",
+    "no-new":"off",
+    "no-plusplus":"off",
+    "import/no-unresolved":"off",
+    "comma-dangle": ["error", "always-multiline"],
+    "semi": "off",
+    "import/extensions":"off"
   }
 }
