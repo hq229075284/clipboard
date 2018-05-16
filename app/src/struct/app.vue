@@ -1,7 +1,7 @@
 <template>
   <v-app class="root">
     <search/>
-    <clipboardList :dataSource="this.dataSource"/>
+    <clipboardList/>
   </v-app>
 </template>
 
@@ -13,19 +13,15 @@ export default {
   data() {
     return {
       name: 'vue app',
-      dataSource: [{ id: '1', content: '123' }],
-    };
-  },
-  mounted() {
-    console.log('mounted')
+    }
   },
   components: {
     search,
     clipboardList,
   },
-};
+}
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 
 </style>

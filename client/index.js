@@ -8,7 +8,7 @@ const isWindows = process.platform === 'win32'
 let win
 
 function createWindow() {
-  win = new BrowserWindow({ width: 800, height: 800, show: false, frame: true })
+  win = new BrowserWindow({ width: 400, height: 400, show: false, frame: true })
 
   win.once('ready-to-show', () => {
     win.show()

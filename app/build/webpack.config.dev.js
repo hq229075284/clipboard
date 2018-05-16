@@ -13,7 +13,7 @@ const webpackDev = {
         include: path.join(__dirname, '../src'),
         exclude: /node_modules/,
         options:{
-          fix:true,
+          // fix:true,
           quiet:true,
           // emitError:true,
         }

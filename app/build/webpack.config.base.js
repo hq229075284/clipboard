@@ -90,5 +90,6 @@ module.exports = {
     runtimeChunk: 'single'
   },
   devtool: '#eval-source-map',
-  target: "electron-renderer"
+  target: "electron-renderer",
+  bail:true,
 }

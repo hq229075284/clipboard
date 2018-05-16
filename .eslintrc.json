@@ -24,8 +24,12 @@
     "no-new":"off",
     "no-plusplus":"off",
     "import/no-unresolved":"off",
+    "no-empty":"warn",
     "comma-dangle": ["error", "always-multiline"],
-    "semi": "off",
-    "import/extensions":"off"
+    "semi": ["error","never"],
+    "max-len": [2,150],
+    "import/extensions":"off",
+    "no-param-reassign":"off",
+    "import/prefer-default-export":"off"
   }
 }

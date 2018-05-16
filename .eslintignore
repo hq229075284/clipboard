@@ -1,3 +1,4 @@
-*
-!app/src
-!client
+app/build/*
+node_modules
+# !app/src/index.js
+# !client
