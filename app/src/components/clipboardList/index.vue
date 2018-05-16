@@ -12,7 +12,7 @@
             <v-icon>{{ one.icon||'bookmark' }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title><div :title="one.content" v-text="one.content"/></v-list-tile-title>
+            <v-list-tile-title><div :title="one.content" v-text="one.content" class="ellipse"/></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-divider :key="`divider-${one.id}`"></v-divider>
@@ -53,18 +53,39 @@ export default {
     },
     setActiveIndex(_index) {
       this.activeIndex = _index
+      this.$nextTick().then(() => {
+        const activeItemDom = this.$el.querySelector('.active')
+        if (!activeItemDom) return
+        const listDom = this.$el.querySelector('.list')
+        const activeTopEdge = activeItemDom.offsetTop
+        const activeBottomEdge = activeItemDom.offsetTop + activeItemDom.offsetHeight
+        const listTopEdge = listDom.scrollTop
+        const listBottomEdge = listDom.scrollTop + listDom.clientHeight
+        if (listTopEdge > activeTopEdge && listTopEdge <= activeBottomEdge) { // activeItem下移
+          listDom.scrollTop = activeTopEdge
+        } else if (listBottomEdge >= activeTopEdge && listBottomEdge < activeBottomEdge) { // activeItem上移
+          listDom.scrollTop = activeBottomEdge - listDom.clientHeight
+        } else if (listTopEdge >= activeBottomEdge) {
+          listDom.scrollTop = activeTopEdge
+        } else if (listBottomEdge <= activeTopEdge) {
+          listDom.scrollTop = activeBottomEdge - listDom.clientHeight
+        }
+      })
     },
     listenKeyDown(e) {
+      let nextActiveIndex
       if (e.keyCode === 38) {
-        this.activeIndex -= 1
-        if (this.activeIndex < 0) {
-          this.activeIndex = this.records.length - 1
+        nextActiveIndex = this.activeIndex - 1
+        if (nextActiveIndex < 0) {
+          nextActiveIndex = this.records.length - 1
         }
+        this.setActiveIndex(nextActiveIndex)
       } else if (e.keyCode === 40) {
-        this.activeIndex += 1
-        if (this.activeIndex === this.records.length) {
-          this.activeIndex = 0
+        nextActiveIndex = this.activeIndex + 1
+        if (nextActiveIndex === this.records.length) {
+          nextActiveIndex = 0
         }
+        this.setActiveIndex(nextActiveIndex)
       } else if (e.keyCode === 13) {
         try {
           if (this.filterRecords[this.activeIndex].id === this.activeId) {
@@ -87,7 +108,7 @@ export default {
 
 <style lang="less">
 .clipboard-list{display: flex;flex-direction: column;
-  >.list{flex:1 1 auto;overflow-x: hidden;
+  >.list{flex:1 1 auto;overflow-x: hidden;position: relative;
     .list__tile--link:hover{background-color: transparent;}
     .active{background-color: rgba(77, 255, 240, 0.5);}
   }

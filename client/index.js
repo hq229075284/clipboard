@@ -1,17 +1,21 @@
-const { BrowserWindow, app, globalShortcut, clipboard, ipcMain } = require('electron')
+const {
+  BrowserWindow, app, globalShortcut, clipboard, ipcMain,
+} = require('electron')
 const url = require('url')
-const isProduction = process.env.NODE_ENV === 'production'
-const isMac = process.platform === 'darwin'
-const isLinux = process.platform === 'linux'
-const isWindows = process.platform === 'win32'
+
+const { isProduction, isMac } = require('./utils/judge')
+const { createMenu } = require('./menu')
 
 let win
 
 function createWindow() {
-  win = new BrowserWindow({ width: 400, height: 400, show: false, frame: true })
+  win = new BrowserWindow({
+    width: 400, height: 420, show: false, frame: true,
+  })
 
   win.once('ready-to-show', () => {
     win.show()
+    // win.showInactive()
   })
 
   win.webContents.openDevTools()
@@ -20,7 +24,9 @@ function createWindow() {
     // protocol: 'http',
   }))
   if (!isProduction && isMac) {
-    const devtool = BrowserWindow.addDevToolsExtension('/Users/HQ/Library/Application Support/Google/Chrome/Default/Extensions/nhdogjmejiglipccpnnnanhbledajbpd/4.1.4_0')
+    /* eslint-disable max-len */
+    BrowserWindow.addDevToolsExtension('/Users/HQ/Library/Application Support/Google/Chrome/Default/Extensions/nhdogjmejiglipccpnnnanhbledajbpd/4.1.4_0')
+    /* eslint-enable max-len */
   }
   win.on('closed', () => {
     // 取消引用 window 对象，如果你的应用支持多窗口的话，
@@ -29,11 +35,16 @@ function createWindow() {
     win = null
   })
 
-  globalShortcut.register('Escape', () => {
-    win.close()
-    win = null
-  })
 
+  // globalShortcut.register('Escape', () => {
+  //   win.close()
+  //   win = null
+  // })
+  createMenu()
+
+  globalShortcut.register('CommandOrControl+Super+Z', () => {
+    win.focus()
+  })
 }
 
 ipcMain.on('poll-clipboard-content', (event, arg) => {
@@ -49,5 +60,4 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
 

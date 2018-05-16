@@ -15,6 +15,13 @@
   "devDependencies": {
     "ajv": "^6.5.0",
     "electron": "^2.0.0",
-    "electron-builder": "^20.13.3"
+    "electron-builder": "^20.13.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-vue": "^4.5.0"
+  },
+  "dependencies": {
+    "lowdb": "^1.0.0"
   }
 }
