@@ -6,6 +6,7 @@ import shortid from 'shortid'
 export function listenerClipboard(store) {
   const adapter = new FileSync('db.json')
   const db = lowdb(adapter)
+  const maxDataCount = 10
 
   db.defaults({ clipboardRecords: [], recordCounter: 0 }).write()
   store.commit('setRecords', db.get('clipboardRecords').value())
@@ -21,7 +22,10 @@ export function listenerClipboard(store) {
     if (db.get('clipboardRecords').find({ content: clipboard.readText() }).size().value() > 0) {
       db.get('clipboardRecords').remove({ content: clipboard.readText() }).value()
       // db.get('clipboardRecords').remove(a => a.content === clipboard.readText()).value()
+    } else if (db.get('clipboardRecords').size().value() >= maxDataCount) {
+      db.get('clipboardRecords').remove((one, i) => i >= maxDataCount - 1).value()
     }
+
     db.get('clipboardRecords')
       .unshift({ id: shortid.generate(), content: clipboard.readText() })
       .write()
