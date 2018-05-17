@@ -35,16 +35,11 @@ function createWindow() {
     win = null
   })
 
+  // createMenu()
 
-  // globalShortcut.register('Escape', () => {
-  //   win.close()
-  //   win = null
+  // globalShortcut.register('CommandOrControl+Super+Z', () => {
+  //   win.focus()
   // })
-  createMenu()
-
-  globalShortcut.register('CommandOrControl+Super+Z', () => {
-    win.focus()
-  })
 }
 
 ipcMain.on('poll-clipboard-content', (event, arg) => {

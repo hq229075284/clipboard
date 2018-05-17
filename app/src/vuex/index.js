@@ -9,9 +9,9 @@ export const store = new Vuex.Store({
     records: [],
   },
   mutations: {
-    setRecords(state) {
+    setRecords(state, nextRecords) {
       // 变更状态
-      state.records = nextRecords
+      state.records = [...nextRecords]
     },
     setKeyword(state, keyword) {
       state.keyword = keyword

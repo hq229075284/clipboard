@@ -8,6 +8,7 @@
       class="input-search"
       color=""
       @keyup="onChangeSearch"
+      @keydown.native="preventUpOrDown"
       @compositionstart="lockSearch"
       @compositionend="unlockSearch"
       :value="keyword"
@@ -26,6 +27,11 @@ export default {
     }
   },
   methods: {
+    preventUpOrDown(e) {
+      if (e.keyCode === 38 || e.keyCode === 40) {
+        e.preventDefault()
+      }
+    },
     onChangeSearch(e) {
       if (!this.lock) {
         console.log('trigger search')

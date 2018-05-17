@@ -1,7 +1,7 @@
 <template>
   <div class="clipboard-list">
     <v-list>
-      <template v-for="(one,index) in filterRecords">
+      <template v-for="(one,index) in records">
         <v-list-tile
           @click="writeToClipboard(one)"
           :key="one.id"
@@ -28,17 +28,6 @@ export default {
   data() {
     return {
       activeIndex: -1,
-      records: [
-        { id: 1, content: '123123123123123123123123123123123123123123123123123' },
-        { id: 2, content: '456' },
-        { id: 3, content: '789' },
-        { id: 4, content: 'a' },
-        { id: 5, content: 'b' },
-        { id: 6, content: 'c' },
-        { id: 7, content: 'd' },
-        { id: 8, content: 'e' },
-        { id: 9, content: 'f' },
-      ],
     }
   },
   mounted() {
@@ -88,8 +77,8 @@ export default {
         this.setActiveIndex(nextActiveIndex)
       } else if (e.keyCode === 13) {
         try {
-          if (this.filterRecords[this.activeIndex].id === this.activeId) {
-            this.writeToClipboard(this.filterRecords[this.activeIndex])
+          if (this.records[this.activeIndex].id === this.activeId) {
+            this.writeToClipboard(this.records[this.activeIndex])
           }
         } catch (err) {}
       }
@@ -98,7 +87,7 @@ export default {
   computed: {
     activeId() { return (this.records[this.activeIndex] || {}).id },
     keyword() { return this.$store.state.keyword },
-    filterRecords() { return this.records.filter(one => new RegExp(this.$store.state.keyword, 'i').test(one.content)) },
+    records() { return this.$store.state.records.filter(one => new RegExp(this.$store.state.keyword, 'i').test(one.content)) },
   },
   watch: {
     keyword() { this.activeIndex = -1 },
