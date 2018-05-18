@@ -7,6 +7,7 @@
       single-line
       class="input-search"
       color=""
+      autofocus
       @keyup="onChangeSearch"
       @keydown.native="preventUpOrDown"
       @compositionstart="lockSearch"

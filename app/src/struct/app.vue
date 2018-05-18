@@ -1,5 +1,6 @@
 <template>
   <v-app class="root">
+    <dragArea></dragArea>
     <search/>
     <clipboardList/>
   </v-app>
@@ -8,6 +9,7 @@
 <script>
 import search from '@components/search'
 import clipboardList from '@components/clipboardList'
+import dragArea from '@components/dragArea'
 
 export default {
   data() {
@@ -18,6 +20,7 @@ export default {
   components: {
     search,
     clipboardList,
+    dragArea,
   },
 }
 </script>

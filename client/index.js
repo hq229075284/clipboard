@@ -10,15 +10,37 @@ let win
 
 function createWindow() {
   win = new BrowserWindow({
-    width: 400, height: 420, show: false, frame: true,
+    width: 400,
+    height: 420,
+    show: false,
+    frame: false,
+    resizable: false,
+    titleBarStyle: 'hidden',
+    opacity: 0.85,
+    alwaysOnTop: true,
+    acceptFirstMouse: true,
   })
 
   win.once('ready-to-show', () => {
     win.show()
     // win.showInactive()
+    setTimeout(() => {
+      Promise.resolve()
+        .then(() => new Promise((resolve) => {
+          setTimeout(() => {
+            win.hide()
+            resolve()
+          }, 0)
+        })).then(() => {
+          win.showInactive()
+        })
+      win.hide()
+      // win.close()
+      // win.blur()
+    }, 5000)
   })
 
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
   win.loadURL(url.format({
     pathname: 'http://localhost:2333/index.html',
     // protocol: 'http',
@@ -35,11 +57,19 @@ function createWindow() {
     win = null
   })
 
+  win.on('blur', () => {
+    // win.hide()
+    // const a = BrowserWindow.getFocusedWindow()
+    // console.log(a)
+    // debugger
+  })
+
   // createMenu()
 
-  // globalShortcut.register('CommandOrControl+Super+Z', () => {
-  //   win.focus()
-  // })
+  globalShortcut.register('CommandOrControl+Alt+Z', () => {
+    // createWindow()
+    win.show()
+  })
 }
 
 ipcMain.on('poll-clipboard-content', (event, arg) => {

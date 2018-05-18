@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { clipboard } from 'electron'
+import { clipboard, remote } from 'electron'
 
 export default {
   data() {
@@ -39,6 +39,9 @@ export default {
   methods: {
     writeToClipboard(_one) {
       clipboard.writeText(_one.content)
+      // setTimeout(() => {
+      //   remote.getCurrentWindow().blur()
+      // }, 1000)
     },
     setActiveIndex(_index) {
       this.activeIndex = _index
@@ -97,7 +100,7 @@ export default {
 
 <style lang="less">
 .clipboard-list{display: flex;flex-direction: column;
-  >.list{flex:1 1 auto;overflow-x: hidden;position: relative;
+  >.list{flex:1 1 auto;overflow-x: hidden;position: relative;padding:0;
     .list__tile--link:hover{background-color: transparent;}
     .active{background-color: rgba(77, 255, 240, 0.5);}
   }
