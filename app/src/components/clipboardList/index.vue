@@ -39,9 +39,7 @@ export default {
   methods: {
     writeToClipboard(_one) {
       clipboard.writeText(_one.content)
-      // setTimeout(() => {
-      //   remote.getCurrentWindow().blur()
-      // }, 1000)
+      remote.getCurrentWindow().hide()
     },
     setActiveIndex(_index) {
       this.activeIndex = _index

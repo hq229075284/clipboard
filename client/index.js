@@ -23,21 +23,6 @@ function createWindow() {
 
   win.once('ready-to-show', () => {
     win.show()
-    // win.showInactive()
-    setTimeout(() => {
-      Promise.resolve()
-        .then(() => new Promise((resolve) => {
-          setTimeout(() => {
-            win.hide()
-            resolve()
-          }, 0)
-        })).then(() => {
-          win.showInactive()
-        })
-      win.hide()
-      // win.close()
-      // win.blur()
-    }, 5000)
   })
 
   // win.webContents.openDevTools()
@@ -58,7 +43,7 @@ function createWindow() {
   })
 
   win.on('blur', () => {
-    // win.hide()
+    win.hide()
     // const a = BrowserWindow.getFocusedWindow()
     // console.log(a)
     // debugger

@@ -26,9 +26,11 @@ export function listenerClipboard(store) {
       db.get('clipboardRecords').remove((one, i) => i >= maxDataCount - 1).value()
     }
 
-    db.get('clipboardRecords')
-      .unshift({ id: shortid.generate(), content: clipboard.readText() })
-      .write()
+    if (!/^\r(\n)?$/.test(clipboard.readText())) {
+      db.get('clipboardRecords')
+        .unshift({ id: shortid.generate(), content: clipboard.readText() })
+        .write()
+    }
 
     store.commit('setRecords', db.get('clipboardRecords').value())
   }, 300)
